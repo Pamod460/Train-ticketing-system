@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>LTMS LOGIN</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    function validate(){
+
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+
+      if(username == "admin" && password == "1234"){
+        alert("Login Sucessfully..!");
+      }else{
+        alert("Login Failed..!");
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <div class="center">
+    <h1>Login</h1>
+    <form method="post">
+      <div class="txt_field">
+        <input type="text" id="username" required>
+        <span></span>
+        <label>Username</label>
+      </div>
+      <div class="txt_field">
+        <input type="password" id="password" required>
+        <span></span>
+        <label>Password</label>
+      </div>
+      <div class="pass">Forgot Password?</div>
+      <input type="submit" value="Login" onclick=validate()>
+      <div class="signup_link">
+        Not a member? <a href="#">Signup</a>
+      </div>
+    </form>
+  </div>
+
+</body>
+
+</html>
