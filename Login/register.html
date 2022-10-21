@@ -1,103 +1,151 @@
 <!DOCTYPE html>
 
-<html lang="en" dir="ltr">
+<html dir="ltr" lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <title>LTMS REGISTER</title>
-  <link rel="stylesheet" href="stylesreg.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-    crossorigin="anonymous"></script>
+    <meta charset="utf-8">
+    <title>LTMS REGISTER</title>
+    <link href="stylesreg.css" rel="stylesheet">
+   
+    <script>
+        window.addEventListener('load', initialize);
+
+        function initialize() {
+            submit.addEventListener('click', Register);
+
+        }
+
+        function Passenger(fname, lname, email, mobile, nic, province, district, address, username, password) {
+            this.fname = fname;
+            this.lname = lname;
+            this.email = email;
+            this.mobile = mobile;
+            this.nic = nic;
+            this.province = province;
+            this.district = district;
+            this.address = address;
+            this.username = username;
+            this.password = password;
+
+        }
+
+        function Register() {
+            let passenger = new Passenger();
+            passenger.fname = fname.value;
+            passenger.lname = lname.value;
+            passenger.email = email.value;
+            passenger.mobile = mobile.value;
+            passenger.nic = nic.value;
+            passenger.province = province.value;
+            passenger.district = district.value;
+            passenger.address = address.value;
+            passenger.username = username.value;
+            if (password.value === repassword.value) {
+                passenger.password =password.value;
+            } else {
+                PwError.innerHTML = "password Does mot match"
+            }
+            var pass = "passenger=" + JSON.stringify(passenger);
+            post(pass);
+
+        }
+
+        function post(pass) {
+
+            var httpd = new XMLHttpRequest();
+            httpd.open("POST", "./login.php", false);
+            httpd.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            httpd.send(pass);
+        }
+    </script>
 
 </head>
 
 <body>
-  <div class="center">
+<div class="center">
     <h1>Register</h1>
-    <form method="post">
+    <form onsubmit="return false">
 
-      <div style="display:block; width:100%;">
-        <div style="width:48%; float: left; display: inline-block;">
-          <div class="txt_field">
-            <input type="text" id="fname" required>
-            <span></span>
-            <label>First Name</label>
-          </div>
+        <div style="display:block; width:100%;">
+            <div style="width:48%; float: left; display: inline-block;">
+                <div class="txt_field">
+                    <input id="fname" name="fname" required type="text">
+                    <span></span>
+                    <label>First Name</label>
+                </div>
 
-          <div class="txt_field">
-            <input type="text" id="lname" required>
-            <span></span>
-            <label>Last Name</label>
-          </div>
+                <div class="txt_field">
+                    <input id="lname" name="lname" required type="text">
+                    <span></span>
+                    <label>Last Name</label>
+                </div>
 
-          <div class="txt_field">
-            <input type="text" id="email" required>
-            <span></span>
-            <label>Email</label>
-          </div>
+                <div class="txt_field">
+                    <input id="email" name="email" required type="text">
+                    <span></span>
+                    <label>Email</label>
+                </div>
 
-          <div class="txt_field">
-            <input type="text" id="mobile" required>
-            <span></span>
-            <label>Mobile</label>
-          </div>
+                <div class="txt_field">
+                    <input id="mobile" name="mobile" required type="text">
+                    <span></span>
+                    <label>Mobile</label>
+                </div>
 
-          <div class="txt_field">
-            <input type="text" id="nic" required>
-            <span></span>
-            <label>Nic</label>
-          </div>
-          <div class="txt_field">
-            <input type="text" id="province" required>
-            <span></span>
-            <label>Province</label>
-          </div>
-          <div class="txt_field">
-            <input type="text" id="district" required>
-            <span></span>
-            <label>District</label>
-          </div>
+                <div class="txt_field">
+                    <input id="nic" name="nic" required type="text">
+                    <span></span>
+                    <label>Nic</label>
+                </div>
+                <div class="txt_field">
+                    <input id="province" name="province" required type="text">
+                    <span></span>
+                    <label>Province</label>
+                </div>
+                <div class="txt_field">
+                    <input id="district" name="district" required type="text">
+                    <span></span>
+                    <label>District</label>
+                </div>
+            </div>
+
+            <div style="width:48%; float: right; display: inline-block;">
+
+                <div class="txt_field">
+                    <input id="address" name="address" required type="text">
+                    <span></span>
+                    <label>Address</label>
+                </div>
+                <div class="txt_field">
+                    <input id="username" name="username" required type="text">
+                    <span></span>
+                    <label>Username</label>
+                </div>
+
+                <div class="txt_field">
+                    <input id="password" name="password" required type="password">
+                    <span></span>
+                    <label>Password</label>
+                </div>
+                <div class="txt_field">
+                    <input id="repassword" name="repassword" required type="password">
+                    <span></span>
+                    <label>Re-Enter Password</label>
+                </div>
+                <p id="PwError"></p>
+                <div class="checkbox">
+                    <input id="agree" name="vehicle1" type="checkbox" value="Bike">
+                    <label for="agree"> I Agree To The Terms And Conditions.</label><br>
+                </div>
+            </div>
         </div>
 
-        <div style="width:48%; float: right; display: inline-block;">
-          
-          <div class="txt_field">
-            <input type="text" id="address" required>
-            <span></span>
-            <label>Address</label>
-          </div>
-          <div class="txt_field">
-            <input type="text" id="username" required>
-            <span></span>
-            <label>Username</label>
-          </div>
-
-          <div class="txt_field">
-            <input type="password" id="password" required>
-            <span></span>
-            <label>Password</label>
-          </div>
-          <div class="txt_field">
-            <input type="password" id="password" required>
-            <span></span>
-            <label>Re-Enter Password</label>
-          </div>
-          <div class="checkbox">
-            <input type="checkbox" id="agree" name="vehicle1" value="Bike">
-            <label for="agree"> I Agree To The Terms And Conditions.</label><br>
-          </div>
+        <input id="submit" type="submit" value="Register">
+        <div class="signin_link">
+            already Registered? <a href="./login.html">Signin</a>
         </div>
-      </div>
-
-      <input type="submit" value="Register" onclick=Register()>
-      <div class="signin_link">
-        already Registered? <a href="#">Signin</a>
-      </div>
     </form>
-  </div>
+</div>
 
 </body>
 
