@@ -1,43 +1,47 @@
-<?php
+<!DOCTYPE html>
 
-$haspassenger = !empty($_POST['passenger']);
+<html lang="en" dir="ltr">
 
-if ($haspassenger){
-    $passenger = json_decode($_POST['passenger']);
-    var_dump($passenger);
-}
-else{
-    echo "Passenger Data Not Found";
-}
-
-$servername = "sql6.freesqldatabase.com";
-$username = "sql6528169";
-$password = "vRxd2a3sCt";
-$database = "sql6528169";
-
-//creating connection
-$dbconn = new mysqli($servername,$username,$password,$database);
-
-// Check connection
-if ($dbconn->connect_error) {
-    die("Connection failed: " . $dbconn->connect_error);
-}
-echo "Connected successfully";
-
-$sql = "INSERT INTO passenger (fname, lname, email,mobile,nic,province,district,address) VALUES ('".$passenger->fname."','".$passenger->lname."','".$passenger->email."',
-        '".$passenger->mobile."','".$passenger->nic."','".$passenger->province."','".$passenger->district."','".$passenger->address."')";
-
-$sql2 = "INSERT INTO user_credentials (username,password) VALUES ('".$passenger->username."','".$passenger->password."')";        
-
-if ($dbconn->query($sql)) {
+<head>
+  <meta charset="utf-8">
+  <title>LTMS LOGIN</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+  <script>
     
-    if($dbconn->query($sql2)){
-        window.alert("New record created successfully");
-    }
-} else {
-    echo "Error: " . $sql . "<br>" . $dbconn->error;
-}
-?>
+  </script>
+</head>
 
+<body>
+  <div class="center">
+    <h1>Login</h1>
+    <form method="post" action="logincontroller.php">
+      <div class="txt_field">
+        <input type="text" id="username" name="username" required>
+        <span></span>
+        <label>Username</label>
+      </div>
+      <div class="txt_field">
+        <input type="password" id="password" name="password" required>
+        <span></span>
+        <label>Password</label>
+      </div>
+      <div>
+        <?php if(isset($_GET['error'])) { ?>
+          <div class="alert alert-danger" role="alert">
+            <?php echo $_GET['error']; ?>
+          </div>          
+      </div>
+      <?php }  ?>
+      <div class="pass">Forgot Password?</div>
+      <input type="submit" value="Login">
+      <div class="signup_link">
+        Not a member? <a href="register.php">Signup</a>
+      </div>
+    </form>
+  </div>
 
+</body>
 
+</html>
