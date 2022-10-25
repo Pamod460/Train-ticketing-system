@@ -45,15 +45,21 @@
             } else {
                 PwError.innerHTML = "password Does mot match"
             }
-            var pass = "passenger=" + JSON.stringify(passenger);
-            post(pass);
+            
+            if(agree.checked){
+                // var pass = "passenger=" + JSON.stringify(passenger);
+                // post(pass);
+            }else{
+                PwError.innerHTML = "You Did Not Agreed With Our Conditions"
+            }
+           
 
         }
 
         function post(pass) {
 
             var httpd = new XMLHttpRequest();
-            httpd.open("POST", "./login.php", false);
+            httpd.open("POST", "./registercontroller.php", false);
             httpd.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             httpd.send(pass);
         }
@@ -132,9 +138,11 @@
                     <span></span>
                     <label>Re-Enter Password</label>
                 </div>
-                <p id="PwError"></p>
+                <div class="error_msg" style="color: red; font-size :small; margin-bottom : 5px ">
+                    <p id="PwError"></p>
+                </div>                
                 <div class="checkbox">
-                    <input id="agree" name="vehicle1" type="checkbox" value="Bike">
+                    <input id="agree" name="agree" type="checkbox">
                     <label for="agree"> I Agree To The Terms And Conditions.</label><br>
                 </div>
             </div>
@@ -142,7 +150,7 @@
 
         <input id="submit" type="submit" value="Register">
         <div class="signin_link">
-            already Registered? <a href="./login.html">Signin</a>
+            already Registered? <a href="./login.php">Signin</a>
         </div>
     </form>
 </div>
