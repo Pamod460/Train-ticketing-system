@@ -47,8 +47,8 @@
             }
             
             if(agree.checked){
-                // var pass = "passenger=" + JSON.stringify(passenger);
-                // post(pass);
+                var pass = "passenger=" + JSON.stringify(passenger);
+                post(pass);
             }else{
                 PwError.innerHTML = "You Did Not Agreed With Our Conditions"
             }
